@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"string.h": "c",
+		"screen-controller.h": "c",
+		"screen_model.h": "c",
+		"game_object_model.h": "c"
+	}
+}
