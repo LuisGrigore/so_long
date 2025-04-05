@@ -1,4 +1,4 @@
-#include "./screen-controller.h"
+#include "./screen_controller.h"
 #include <stdlib.h>
 #include "../../../minilibx/mlx.h"
 

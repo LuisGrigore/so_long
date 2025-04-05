@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:21:07 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/05 16:29:14 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:48:17 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ typedef struct s_game_object
 	t_image *image;
 	e_game_object_type type;
 }	t_game_object;
+
+t_game_object *init_game_object(t_image *image, t_vector2 position, e_game_object_type type);
 
 #endif
