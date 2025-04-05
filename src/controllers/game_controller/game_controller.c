@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-void load_player_from_file(t_game *game, char *path, t_image *image)
+void load_player_from_file(t_game *game, char *path, t_image *image, int tile_size)
 {
     int fd = open(path, O_RDONLY);
 	char c;
@@ -20,15 +20,16 @@ void load_player_from_file(t_game *game, char *path, t_image *image)
 	read_ret = read(fd, &c, 1);
 	while(read_ret == 1)
 	{
-		current_pos.x ++;
-		if(c == '\n')
-		{
-			current_pos.y ++;
-			current_pos.x = 0;
-		}
+		
 		if(c == 'P')
 		{
 			game->player = init_game_object(image, current_pos, PLAYER);
+		}
+		current_pos.x += tile_size;
+		if(c == '\n')
+		{
+			current_pos.y += tile_size;
+			current_pos.x = 0;
 		}
 		read_ret = read(fd, &c, 1);
 	}

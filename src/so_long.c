@@ -14,7 +14,7 @@ t_game *create_game(t_screen *screen)
 
 	t_image *player_image = load_xpm_image(screen, "./sprites/player.xpm");
 
-	load_player_from_file(game, "./maps/test", player_image);
+	load_player_from_file(game, "./maps/test", player_image, TILE_SIZE);
 
 	return game;
 }
