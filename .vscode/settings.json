@@ -3,6 +3,8 @@
 		"string.h": "c",
 		"screen-controller.h": "c",
 		"screen_model.h": "c",
-		"game_object_model.h": "c"
+		"game_object_model.h": "c",
+		"player_controller.h": "c",
+		"image_model.h": "c"
 	}
 }

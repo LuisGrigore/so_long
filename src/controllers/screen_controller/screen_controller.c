@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:04:29 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:06:37 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/06 18:37:20 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ t_image	*load_image(t_screen *screen, char *xpm_path)
 		return (NULL);
 	}
 	return (init_image(img, addr, bpp, line_length, endian, width, height));
+}
+
+void	start_loop(t_screen *screen)
+{
+	mlx_loop(screen->mlx);
 }
