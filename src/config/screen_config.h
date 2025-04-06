@@ -1,5 +1,17 @@
-#ifndef SCREEN_CONFIG
-# define SCREEN_CONFIG
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   screen_config.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/06 17:04:09 by lgrigore          #+#    #+#             */
+/*   Updated: 2025/04/06 17:04:14 by lgrigore         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SCREEN_CONFIG_H
+# define SCREEN_CONFIG_H
 
 # ifndef WINDOW_X_SIZE
 #  define WINDOW_X_SIZE 800
