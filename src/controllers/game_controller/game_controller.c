@@ -1,37 +1,37 @@
 #include "./game_controller.h"
-#include <fcntl.h>  // Para O_RDONLY
-#include <unistd.h> // Para open, read, close
 #include <stdio.h>
 #include <errno.h>
 
-void load_player_from_file(t_game *game, char *path, t_image *image, int tile_size)
+void game_object_factory(t_game *game, t_image_butch image_butch, t_vector2 position, char c)
 {
-    int fd = open(path, O_RDONLY);
+	if(c == 'P')
+	{
+		game->player = init_game_object(image_butch.player_image, position, PLAYER);
+		insert_front(game->floors, init_game_object(image_butch.floor_image, position, MAP));
+	}
+	else if(c == '1')
+		insert_front(game->walls, init_game_object(image_butch.wall_image, position, MAP));
+	else if(c == '0')
+		insert_front(game->floors, init_game_object(image_butch.floor_image, position, MAP));
+}
+
+void load_game_objects_from_map(t_game *game, t_image_butch image_butch, int map_fd, int tile_size)
+{
 	char c;
 	int read_ret = 0;
 
 	t_vector2 current_pos = get_vector_from_floats(0,0);
 
-    if (fd == -1) {
-        perror("Error al abrir el archivo");
-        return;
-    }
-
-	read_ret = read(fd, &c, 1);
+	read_ret = read(map_fd, &c, 1);
 	while(read_ret == 1)
 	{
-		
-		if(c == 'P')
-		{
-			game->player = init_game_object(image, current_pos, PLAYER);
-		}
+		game_object_factory(game, image_butch, current_pos, c);
 		current_pos.x += tile_size;
 		if(c == '\n')
 		{
 			current_pos.y += tile_size;
 			current_pos.x = 0;
 		}
-		read_ret = read(fd, &c, 1);
+		read_ret = read(map_fd, &c, 1);
 	}
-	close(fd);
 }
