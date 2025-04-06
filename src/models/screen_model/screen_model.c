@@ -6,13 +6,14 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:31:35 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:34:08 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/06 19:46:21 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./screen_model.h"
 #include "../../../minilibx/mlx.h"
 #include "../../utils/utils.h"
+#include <stdio.h>
 
 t_image	*get_screen_buffe(t_screen *screen)
 {
@@ -64,6 +65,5 @@ void	destroy_screen(t_screen *screen)
 		mlx_destroy_window(screen->mlx, screen->mlx_win);
 	if (screen->mlx)
 		mlx_destroy_display(screen->mlx);
-	free(screen->mlx);
 	free(screen);
 }
