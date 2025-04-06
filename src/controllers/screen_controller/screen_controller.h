@@ -3,8 +3,13 @@
 # include "../../models/screen_model/screen_model.h"
 # include "../../models/image_model/image_model.h"
 
-t_image *load_xpm_image(t_screen *screen, char *xpm_path);
+
+typedef int (*t_hook_funct) ();
+
+t_image *load_image(t_screen *screen, char *xpm_path);
 void    add_image_to_buff(t_screen *screen, t_image *img, t_vector2 position);
 void draw_screen_buff(t_screen *screen);
+void set_loop_hook(t_screen *screen, t_hook_funct loop_funct, void *param);
+void start_loop(t_screen *screen);
 
 #endif
