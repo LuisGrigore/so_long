@@ -6,12 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:11:28 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:14:03 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/06 21:19:21 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./game_state_controller.h"
 #include "../game_controller/game_controller.h"
+#include "../screen_controller/screen_controller.h"
 
 void	add_player_to_screen_buff(t_game *game, t_screen *screen)
 {
@@ -49,6 +50,7 @@ void	add_floors_to_screen_buff(t_game *game, t_screen *screen)
 
 int	game_loop(t_game_state *game_state)
 {
+	check_collisions(game_state->game);
 	add_floors_to_screen_buff(game_state->game, game_state->screen);
 	add_walls_to_screen_buff(game_state->game, game_state->screen);
 	add_player_to_screen_buff(game_state->game, game_state->screen);

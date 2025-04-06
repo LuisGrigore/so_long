@@ -31,6 +31,8 @@ t_game *load_game(t_screen *screen, char *map_path, t_image_butch image_butch)
 
 	load_game_objects_from_map(game, image_butch, map_fd, TILE_SIZE);
 
+	check_collisions(game);
+	
 	return game;
 }
 

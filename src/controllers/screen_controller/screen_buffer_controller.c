@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:07:11 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:09:22 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/06 20:50:40 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	add_image_to_buff(t_screen *screen, t_image *img, t_vector2 position)
 			}
 		}
 	}
-	mlx_put_image_to_window(screen->mlx, screen->mlx_win, screen->buffer->img, 0, 0);
 }
 
 void	draw_screen_buff(t_screen *screen)
