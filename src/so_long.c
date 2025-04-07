@@ -58,7 +58,7 @@ int main() {
 
     t_game *game = load_game(screen, "./maps/test", image_butch);
 
-	t_game_state *game_state = init_game_state(game, screen);
+	t_game_state *game_state = init_game_state(game, screen, STEP);
 
 	set_loop_hook(screen, game_loop, game_state);
 

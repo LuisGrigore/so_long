@@ -6,14 +6,14 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:29:06 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 19:42:04 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:14:22 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./game_state_model.h"
 #include "../../utils/utils.h"
 
-t_game_state	*init_game_state(t_game *game, t_screen *screen)
+t_game_state	*init_game_state(t_game *game, t_screen *screen, int step_counter)
 {
 	t_game_state	*new_game_state;
 
@@ -22,6 +22,7 @@ t_game_state	*init_game_state(t_game *game, t_screen *screen)
 		return (NULL);
 	new_game_state->game = game;
 	new_game_state->screen = screen;
+	new_game_state->step_counter = step_counter;
 	return (new_game_state);
 }
 

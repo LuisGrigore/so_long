@@ -6,11 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:14:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 21:25:39 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:44:09 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./game_controller.h"
+#include "../player_controller/player_controller.h"
+#include "../../utils/vector2.h"
 #include <stdio.h>
 #include <errno.h>
 #include <stdio.h>
@@ -24,16 +26,16 @@ void	game_object_factory(t_game *game, t_image_butch image_butch,
 	if (c == 'P')
 	{
 		game->player = init_game_object(image_butch.player_image,
-				position, PLAYER, can_move_player);
+				position, get_vector_from_floats(0, 0), PLAYER, can_move_player);
 		insert_front(game->floors, init_game_object(image_butch.floor_image,
-				position, MAP, can_move_rest));
+				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
 	}
 	else if (c == '1')
 		insert_front(game->walls, init_game_object(image_butch.wall_image,
-				position, MAP, can_move_rest));
+				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
 	else if (c == '0')
 		insert_front(game->floors, init_game_object(image_butch.floor_image,
-				position, MAP, can_move_rest));
+				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
 }
 
 void	load_game_objects_from_map(t_game *game, t_image_butch image_butch,
@@ -103,4 +105,9 @@ void	check_collisions(t_game *game)
 		check_right(game->player, current_wall);
 		current_wall_node = current_wall_node->next;
 	}
+}
+
+void	update_game(t_game *game)
+{
+	update_player(game->player);
 }
