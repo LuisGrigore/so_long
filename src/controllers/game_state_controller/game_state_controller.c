@@ -77,5 +77,6 @@ int	game_loop(t_game_state *game_state)
 	add_player_to_screen_buff(game_state->game, game_state->screen);
 	add_enemies_to_screen_buff(game_state->game, game_state->screen);
 	draw_screen_buff(game_state->screen);
+	print_moves(game_state->screen, "Total moves: ", 0);
 	game_state->step_counter --;
 }

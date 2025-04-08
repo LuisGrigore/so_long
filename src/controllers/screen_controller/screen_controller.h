@@ -23,5 +23,6 @@ void	set_loop_hook(t_screen *screen, t_hook_funct loop_funct, void *param);
 void	set_x_hook(t_screen *screen, t_hook_funct key_funct, void *param);
 void	set_key_hook(t_screen *screen, t_hook_funct key_funct, void *param);
 void	start_loop(t_screen *screen);
+void print_moves(t_screen *screen, char *label, int moves);
 
 #endif

@@ -84,3 +84,79 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*new_str;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	new_str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1,
+			sizeof(char));
+	if (!s1 || !s2)
+		return (NULL);
+	if (!new_str)
+		return (NULL);
+	while (i < ft_strlen(s1))
+	{
+		new_str[i] = s1[i];
+		i++;
+	}
+	while (j < ft_strlen(s2))
+	{
+		new_str[i + j] = s2[j];
+		j++;
+	}
+	new_str[i + j] = '\0';
+	return (new_str);
+}
+
+static int	get_length(int n)
+{
+	int		len;
+
+	if (n <= 0)
+	{
+		len = 1;
+	}
+	else
+	{
+		len = 0;
+	}
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	int		len;
+	char	*str;
+	long	num;
+
+	len = get_length(n);
+	num = n;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	if (num < 0)
+	{
+		str[0] = '-';
+		num = -num;
+	}
+	while (len-- > 0)
+	{
+		if (str[len] == '-')
+			break ;
+		str[len] = (num % 10) + '0';
+		num /= 10;
+	}
+	return (str);
+}

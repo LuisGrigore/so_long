@@ -13,6 +13,8 @@
 #include "./screen_controller.h"
 #include <stdlib.h>
 #include "../../../minilibx/mlx.h"
+#include <stdio.h>
+#include "../../utils/utils.h"
 
 t_image	*load_image(t_screen *screen, char *xpm_path)
 {
@@ -41,4 +43,20 @@ t_image	*load_image(t_screen *screen, char *xpm_path)
 void	start_loop(t_screen *screen)
 {
 	mlx_loop(screen->mlx);
+}
+
+
+void print_moves(t_screen *screen, char *label, int moves)
+{
+    char *moves_str;
+    char *full_str;
+
+    moves_str = ft_itoa(moves);
+
+    full_str = ft_strjoin(label, moves_str);
+
+    mlx_string_put(screen->mlx, screen->mlx_win, 10, screen->size.y, 0xFFFFFF, full_str);
+
+    free(moves_str);
+    free(full_str);
 }
