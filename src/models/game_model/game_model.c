@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:26:22 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:27:36 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 02:19:51 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_game	*init_game(void)
 	game->floors = init_list(sizeof(t_game_object));
 	game->player = init_list(sizeof(t_game_object));
 	game->walls = init_list(sizeof(t_game_object));
+	game->enemies = init_list(sizeof(t_game_object));
 	return (game);
 }
 

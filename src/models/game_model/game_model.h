@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:27:46 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:28:50 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 02:19:37 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_game_model
 	t_list			*walls;
 	t_list			*floors;
 	t_list			*coins;
+	t_list			*enemies;
 	t_game_object	*player;
 	t_game_object	*exit;
 }	t_game;

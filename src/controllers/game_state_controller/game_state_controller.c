@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:11:28 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/08 02:05:12 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 02:39:02 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,25 @@ void	add_floors_to_screen_buff(t_game *game, t_screen *screen)
 	}
 }
 
+void	add_enemies_to_screen_buff(t_game *game, t_screen *screen)
+{
+	t_node			*current_node;
+	t_game_object	*current_enemy;
+
+	current_node = game->enemies->head;
+	while (current_node)
+	{
+		current_enemy = (t_game_object *) current_node->data;
+		add_image_to_buff(screen, current_enemy->current_image,
+			current_enemy->position);
+		current_node = current_node->next;
+	}
+}
+
 int	game_loop(t_game_state *game_state)
 {
-	check_collisions(game_state->game);
+	check_player_collisions(game_state->game);
+	check_enemies_collisions(game_state->game);
 	if(game_state->step_counter == 0)
 	{
 		update_game(game_state->game);
@@ -59,6 +75,7 @@ int	game_loop(t_game_state *game_state)
 	add_floors_to_screen_buff(game_state->game, game_state->screen);
 	add_walls_to_screen_buff(game_state->game, game_state->screen);
 	add_player_to_screen_buff(game_state->game, game_state->screen);
+	add_enemies_to_screen_buff(game_state->game, game_state->screen);
 	draw_screen_buff(game_state->screen);
 	game_state->step_counter --;
 }
