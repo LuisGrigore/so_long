@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:14:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/08 00:44:09 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 02:09:07 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,39 @@
 #include <errno.h>
 #include <stdio.h>
 
+
 void	game_object_factory(t_game *game, t_image_butch image_butch,
 		t_vector2 position, char c)
 {
 	t_can_move can_move_player = get_can_move(1,1,1,1);
 	t_can_move can_move_rest = get_can_move(0,0,0,0);
+	t_list *images;
 	
 	if (c == 'P')
 	{
-		game->player = init_game_object(image_butch.player_image,
+		images = init_list(sizeof(t_image));
+		insert_front(images, image_butch.player_image);
+		game->player = init_game_object(images,
 				position, get_vector_from_floats(0, 0), PLAYER, can_move_player);
-		insert_front(game->floors, init_game_object(image_butch.floor_image,
+		images = init_list(sizeof(t_image));
+		insert_front(images, image_butch.floor_image);
+		insert_front(game->floors, init_game_object(images,
 				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
 	}
 	else if (c == '1')
-		insert_front(game->walls, init_game_object(image_butch.wall_image,
+	{
+		images = init_list(sizeof(t_image));
+		insert_front(images, image_butch.wall_image);
+		insert_front(game->walls, init_game_object(images,
 				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
+	}
 	else if (c == '0')
-		insert_front(game->floors, init_game_object(image_butch.floor_image,
+	{
+		images = init_list(sizeof(t_image));
+		insert_front(images, image_butch.floor_image);
+		insert_front(game->floors, init_game_object(images,
 				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
+	}
 }
 
 void	load_game_objects_from_map(t_game *game, t_image_butch image_butch,

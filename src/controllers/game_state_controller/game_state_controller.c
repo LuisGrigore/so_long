@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:11:28 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/08 01:46:44 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/08 02:05:12 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	add_player_to_screen_buff(t_game *game, t_screen *screen)
 {
-	add_image_to_buff(screen, game->player->image, game->player->position);
+	add_image_to_buff(screen, game->player->current_image, game->player->position);
 }
 
 void	add_walls_to_screen_buff(t_game *game, t_screen *screen)
@@ -28,7 +28,7 @@ void	add_walls_to_screen_buff(t_game *game, t_screen *screen)
 	while (current_node)
 	{
 		current_wall = (t_game_object *) current_node->data;
-		add_image_to_buff(screen, current_wall->image, current_wall->position);
+		add_image_to_buff(screen, current_wall->current_image, current_wall->position);
 		current_node = current_node->next;
 	}
 }
@@ -42,7 +42,7 @@ void	add_floors_to_screen_buff(t_game *game, t_screen *screen)
 	while (current_node)
 	{
 		current_floor = (t_game_object *) current_node->data;
-		add_image_to_buff(screen, current_floor->image,
+		add_image_to_buff(screen, current_floor->current_image,
 			current_floor->position);
 		current_node = current_node->next;
 	}
