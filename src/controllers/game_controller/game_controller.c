@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:14:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/08 03:28:11 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:20:15 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void	game_object_factory(t_game *game, t_image_butch image_butch,
 	}
 }
 
-void	load_game_objects_from_map(t_game *game, t_image_butch image_butch,
-		int map_fd, int tile_size)
+void	load_game_objects_from_map(t_game *game, t_image_butch image_butch, int map_fd, int tile_size)
 {
 	char		c;
 	int			read_ret;
@@ -88,30 +87,31 @@ void	load_game_objects_from_map(t_game *game, t_image_butch image_butch,
 void	check_up(t_game_object *player, t_game_object *wall)
 {
 	if((wall->position.x == player->position.x) && (player->position.y == wall->position.y + 32))
-		player->can_move.up = 0;
+		set_can_move_up(player, FALSE);
 }
 void	check_down(t_game_object *player, t_game_object *wall)
 {
 	if((wall->position.x == player->position.x) && (player->position.y == wall->position.y - 32))
-		player->can_move.down = 0;
+		set_can_move_down(player, FALSE);
 }
 void	check_left(t_game_object *player, t_game_object *wall)
 {
 	if((wall->position.y == player->position.y) && (player->position.x == wall->position.x + 32))
-		player->can_move.left = 0;
+		set_can_move_left(player, FALSE);
 }
 
 void	check_right(t_game_object *player, t_game_object *wall)
 {
 	if((wall->position.y == player->position.y) && (player->position.x == wall->position.x - 32))
-		player->can_move.right = 0;
+		set_can_move_right(player, FALSE);
 }
 
 void	check_player_collisions(t_game *game)
 {
 	t_node *current_wall_node = game->walls->head;
 	t_game_object *current_wall;
-	game->player->can_move = get_can_move(1,1,1,1);
+	
+	allow_all_movement(game->player);
 	while (current_wall_node)
 	{
 		current_wall = (t_game_object *) current_wall_node->data;
@@ -146,9 +146,9 @@ void	check_enemies_collisions(t_game *game)
 		{
 			current_enemy = (t_game_object *) current_enemy_node->data;
 			if((current_enemy->position.x == current_wall->position.x) && ((current_enemy->position.y - 32) == current_wall->position.y))
-				current_enemy->can_move.up = 0;
+				set_can_move_up(current_enemy, FALSE);	
 			if((current_enemy->position.x == current_wall->position.x) && ((current_enemy->position.y + 32) == current_wall->position.y))
-				current_enemy->can_move.down = 0;
+				set_can_move_down(current_enemy, FALSE);
 			current_enemy_node = current_enemy_node->next;
 		}
 		current_wall_node = current_wall_node->next;
