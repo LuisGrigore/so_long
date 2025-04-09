@@ -5,6 +5,8 @@
 		"screen_model.h": "c",
 		"game_object_model.h": "c",
 		"player_controller.h": "c",
-		"image_model.h": "c"
+		"image_model.h": "c",
+		"enemy_controller.h": "c",
+		"vector2.h": "c"
 	}
 }

@@ -52,7 +52,7 @@ t_list *get_key_funct_mappings(t_game_state *game_state)
 
 
 int main() {
-	t_screen *screen = init_screen(get_vector_from_floats(WINDOW_X_SIZE, WINDOW_Y_SIZE), WINDOW_TITLE);
+	t_screen *screen = init_screen(get_vector(WINDOW_X_SIZE, WINDOW_Y_SIZE), WINDOW_TITLE);
 
 	t_image_butch image_butch = load_images(screen, "");
 

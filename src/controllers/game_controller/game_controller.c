@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:14:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/09 03:20:15 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:43:01 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,7 @@
 #include "../../utils/vector2.h"
 #include <stdio.h>
 #include <errno.h>
-
-
-void	game_object_factory(t_game *game, t_image_butch image_butch,
-		t_vector2 position, char c)
-{
-	t_can_move can_move_player = get_can_move(1,1,1,1);
-	t_can_move can_move_rest = get_can_move(0,0,0,0);
-	t_list *images;
-	
-	if (c == 'P')
-	{
-		images = init_list(sizeof(t_image));
-		insert_front(images, image_butch.player_image);
-		game->player = init_game_object(images,
-				position, get_vector_from_floats(0, 0), PLAYER, can_move_player);
-		images = init_list(sizeof(t_image));
-		insert_front(images, image_butch.floor_image);
-		insert_front(game->floors, init_game_object(images,
-				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
-	}
-	else if (c == '1')
-	{
-		images = init_list(sizeof(t_image));
-		insert_front(images, image_butch.wall_image);
-		insert_front(game->walls, init_game_object(images,
-				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
-	}
-	else if (c == '0')
-	{
-		images = init_list(sizeof(t_image));
-		insert_front(images, image_butch.floor_image);
-		insert_front(game->floors, init_game_object(images,
-				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
-	}
-	else if (c == 'e')
-	{
-		images = init_list(sizeof(t_image));
-		insert_front(images, image_butch.wall_image);
-		insert_front(game->enemies, init_game_object(images,
-				position, get_vector_from_floats(0, 0), MAP, get_can_move(1,1,0,0)));
-				images = init_list(sizeof(t_image));
-		insert_front(images, image_butch.floor_image);
-		insert_front(game->floors, init_game_object(images,
-				position, get_vector_from_floats(0, 0), MAP, can_move_rest));
-	}
-}
+#include "./game_object_factory/game_object_factory.h"
 
 void	load_game_objects_from_map(t_game *game, t_image_butch image_butch, int map_fd, int tile_size)
 {
@@ -70,7 +25,7 @@ void	load_game_objects_from_map(t_game *game, t_image_butch image_butch, int map
 	t_vector2	current_pos;
 
 	read_ret = read(map_fd, &c, 1);
-	current_pos = get_vector_from_floats(0, 0);
+	current_pos = get_vector(0, 0);
 	while (read_ret == 1)
 	{
 		game_object_factory(game, image_butch, current_pos, c);
@@ -108,27 +63,28 @@ void	check_right(t_game_object *player, t_game_object *wall)
 
 void	check_player_collisions(t_game *game)
 {
-	t_node *current_wall_node = game->walls->head;
+	t_node *current_wall_node = get_walls(game)->head;
 	t_game_object *current_wall;
+	t_game_object *player = get_player(game);
 	
 	allow_all_movement(game->player);
 	while (current_wall_node)
 	{
 		current_wall = (t_game_object *) current_wall_node->data;
-		check_up(game->player, current_wall);
-		check_down(game->player, current_wall);
-		check_left(game->player, current_wall);
-		check_right(game->player, current_wall);
+		check_up(player, current_wall);
+		check_down(player, current_wall);
+		check_left(player, current_wall);
+		check_right(player, current_wall);
 		current_wall_node = current_wall_node->next;
 	}
 }
 
 void	check_enemies_collisions(t_game *game)
 {
-	t_node *current_wall_node = game->walls->head;
+	t_node *current_wall_node = get_walls(game)->head;
 	t_game_object *current_wall;
 
-	t_node *current_enemy_node = game->enemies->head;
+	t_node *current_enemy_node = get_enemies(game)->head;
 	t_game_object *current_enemy;
 	while(current_enemy_node)
 	{
@@ -141,7 +97,7 @@ void	check_enemies_collisions(t_game *game)
 	while (current_wall_node)
 	{
 		current_wall = (t_game_object *) current_wall_node->data;
-		current_enemy_node = game->enemies->head;
+		current_enemy_node = get_enemies(game)->head;
 		while(current_enemy_node)
 		{
 			current_enemy = (t_game_object *) current_enemy_node->data;

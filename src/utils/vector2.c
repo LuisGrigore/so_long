@@ -6,13 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:22:41 by lgrigore          #+#    #+#             */
-/*   Updated: 2025/04/06 17:23:17 by lgrigore         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:43:01 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./vector2.h"
 
-t_vector2	get_vector_from_floats(float x, float y)
+t_vector2	get_vector(float x, float y)
 {
 	t_vector2	vector;
 
